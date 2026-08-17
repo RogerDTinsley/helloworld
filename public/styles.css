@@ -1,0 +1,44 @@
+/* Pink & Turquoise theme */
+:root {
+  --pink: #ff69b4;
+  --turquoise: #40e0d0;
+  --pink-dark: #c71585;
+  --turquoise-dark: #20b2aa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--pink) 0%, var(--turquoise) 100%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+pre {
+  font-size: 1.5rem;
+  letter-spacing: 0.3em;
+  color: var(--turquoise-dark);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1.5rem;
+  border-radius: 999px;
+  border: 2px solid var(--pink-dark);
+}
