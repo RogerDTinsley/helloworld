@@ -47,7 +47,7 @@ function saveWorkouts() {
   setCookie(COOKIE_NAME, JSON.stringify(workouts));
 }
 
-// Render list
+// Render as a table (1 line / row per workout)
 function renderWorkouts() {
   if (!listEl) return;
   listEl.innerHTML = "";
@@ -57,22 +57,48 @@ function renderWorkouts() {
     return;
   }
 
+  const table = document.createElement("table");
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Type</th>
+        <th>Distance (mi)</th>
+        <th>Pace (min/mi)</th>
+        <th>Temp (°F)</th>
+        <th>Weather</th>
+        <th>Comments</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  `;
+
+  const tbody = table.querySelector("tbody");
+
   workouts.forEach((w) => {
-    const card = document.createElement("div");
-    card.className = "workout-card";
-    card.innerHTML = `
-      <h3>${w.type}</h3>
-      <p><strong>Date:</strong> ${w.date} &nbsp;|&nbsp; <strong>Time:</strong> ${w.time}</p>
-      <p><strong>Distance:</strong> ${w.distance} mi &nbsp;|&nbsp; <strong>Pace:</strong> ${w.pace} min/mi</p>
-      <p><strong>Temp:</strong> ${w.temp != null ? w.temp + " F" : "-"} &nbsp;|&nbsp; <strong>Weather:</strong> ${w.weather || "-"}</p>
-      <p><strong>Comments:</strong> ${w.comments || "-"}</p>
-      <div class="workout-actions">
-        <button type="button" class="edit-btn" data-id="${w.id}">Edit</button>
-        <button type="button" class="delete-btn" data-id="${w.id}">Delete</button>
-      </div>
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${w.date || "-"}</td>
+      <td>${w.time || "-"}</td>
+      <td>${w.type || "-"}</td>
+      <td>${w.distance != null ? w.distance : "-"}</td>
+      <td>${w.pace != null ? w.pace : "-"}</td>
+      <td>${w.temp != null ? w.temp : "-"}</td>
+      <td>${w.weather || "-"}</td>
+      <td>${w.comments || "-"}</td>
+      <td>
+        <div class="workout-actions">
+          <button type="button" class="edit-btn" data-id="${w.id}">Edit</button>
+          <button type="button" class="delete-btn" data-id="${w.id}">Delete</button>
+        </div>
+      </td>
     `;
-    listEl.appendChild(card);
+    tbody.appendChild(tr);
   });
+
+  listEl.appendChild(table);
 
   // Attach event listeners
   listEl.querySelectorAll(".edit-btn").forEach((btn) => {
