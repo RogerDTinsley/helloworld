@@ -8,10 +8,19 @@ const listEl = document.getElementById("workouts-list");
 let workouts = [];
 let editingId = null;
 
-// Cookie helpers
+// Robust unique ID that works everywhere (including file://)
+function generateId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+}
+
+// Cookie helpers (more reliable parsing)
 function getCookie(name) {
-  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-  return match ? decodeURIComponent(match[2]) : null;
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return decodeURIComponent(parts.pop().split(";").shift());
+  }
+  return null;
 }
 
 function setCookie(name, value, days = 365) {
@@ -40,6 +49,7 @@ function saveWorkouts() {
 
 // Render list
 function renderWorkouts() {
+  if (!listEl) return;
   listEl.innerHTML = "";
 
   if (workouts.length === 0) {
@@ -54,11 +64,11 @@ function renderWorkouts() {
       <h3>${w.type}</h3>
       <p><strong>Date:</strong> ${w.date} &nbsp;|&nbsp; <strong>Time:</strong> ${w.time}</p>
       <p><strong>Distance:</strong> ${w.distance} mi &nbsp;|&nbsp; <strong>Pace:</strong> ${w.pace} min/mi</p>
-      <p><strong>Temp:</strong> ${w.temp ? w.temp + "°F" : "—"} &nbsp;|&nbsp; <strong>Weather:</strong> ${w.weather || "—"}</p>
-      <p><strong>Comments:</strong> ${w.comments || "—"}</p>
+      <p><strong>Temp:</strong> ${w.temp != null ? w.temp + " F" : "-"} &nbsp;|&nbsp; <strong>Weather:</strong> ${w.weather || "-"}</p>
+      <p><strong>Comments:</strong> ${w.comments || "-"}</p>
       <div class="workout-actions">
-        <button class="edit-btn" data-id="${w.id}">Edit</button>
-        <button class="delete-btn" data-id="${w.id}">Delete</button>
+        <button type="button" class="edit-btn" data-id="${w.id}">Edit</button>
+        <button type="button" class="delete-btn" data-id="${w.id}">Delete</button>
       </div>
     `;
     listEl.appendChild(card);
@@ -92,7 +102,7 @@ function startEdit(id) {
   document.getElementById("type").value = w.type;
   document.getElementById("distance").value = w.distance;
   document.getElementById("pace").value = w.pace;
-  document.getElementById("temp").value = w.temp || "";
+  document.getElementById("temp").value = w.temp != null ? w.temp : "";
   document.getElementById("weather").value = w.weather || "";
   document.getElementById("comments").value = w.comments || "";
 
@@ -100,7 +110,6 @@ function startEdit(id) {
   submitBtn.textContent = "Update Workout";
   cancelBtn.classList.remove("hidden");
 
-  // Scroll to form
   form.scrollIntoView({ behavior: "smooth" });
 }
 
@@ -117,7 +126,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const workout = {
-    id: editingId || crypto.randomUUID(),
+    id: editingId || generateId(),
     date: document.getElementById("date").value,
     time: document.getElementById("time").value,
     type: document.getElementById("type").value,
@@ -131,11 +140,10 @@ form.addEventListener("submit", (e) => {
   };
 
   if (editingId) {
-    // Update existing
     const idx = workouts.findIndex((w) => w.id === editingId);
     if (idx !== -1) workouts[idx] = workout;
   } else {
-    // Add to front of list
+    // Add to front of the list
     workouts.unshift(workout);
   }
 
