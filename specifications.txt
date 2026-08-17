@@ -5,7 +5,7 @@ add a separate css and make the theme of the page pink and turquoise.  Center ev
 
 I want to create a web page to be hosted on cloudflare.
 
-I want to use cookies to show all the workouts that have already been added, with a form for a new workout that will be added to the 
+I want to use cookies to show a list of all the workouts that have already been added, with a form for a new workout that will be added to the 
 front of the list of existing workouts and saved back to the cookie.
 
 I also want to be able to edit any workout or delete any workout.
