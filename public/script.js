@@ -3,6 +3,7 @@ const form = document.getElementById("workout-form");
 const formTitle = document.getElementById("form-title");
 const submitBtn = document.getElementById("submit-btn");
 const cancelBtn = document.getElementById("cancel-btn");
+const deleteBtn = document.getElementById("delete-btn");
 const listEl = document.getElementById("workouts-list");
 
 let workouts = [];
@@ -13,7 +14,7 @@ function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
 }
 
-// Cookie helpers (more reliable parsing)
+// Cookie helpers
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -47,7 +48,7 @@ function saveWorkouts() {
   setCookie(COOKIE_NAME, JSON.stringify(workouts));
 }
 
-// Render as a table (1 line / row per workout)
+// Render table (date, time, type, distance, pace + Edit)
 function renderWorkouts() {
   if (!listEl) return;
   listEl.innerHTML = "";
@@ -64,48 +65,33 @@ function renderWorkouts() {
         <th>Date</th>
         <th>Time</th>
         <th>Type</th>
-        <th>Distance (mi)</th>
-        <th>Pace (min/mi)</th>
-        <th>Temp (°F)</th>
-        <th>Weather</th>
-        <th>Comments</th>
+        <th>Distance</th>
+        <th>Pace</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody></tbody>
   `;
-
   const tbody = table.querySelector("tbody");
 
   workouts.forEach((w) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${w.date || "-"}</td>
-      <td>${w.time || "-"}</td>
-      <td>${w.type || "-"}</td>
-      <td>${w.distance != null ? w.distance : "-"}</td>
-      <td>${w.pace != null ? w.pace : "-"}</td>
-      <td>${w.temp != null ? w.temp : "-"}</td>
-      <td>${w.weather || "-"}</td>
-      <td>${w.comments || "-"}</td>
-      <td>
-        <div class="workout-actions">
-          <button type="button" class="edit-btn" data-id="${w.id}">Edit</button>
-          <button type="button" class="delete-btn" data-id="${w.id}">Delete</button>
-        </div>
-      </td>
+      <td>${w.date}</td>
+      <td>${w.time}</td>
+      <td>${w.type}</td>
+      <td>${w.distance} mi</td>
+      <td>${w.pace} min/mi</td>
+      <td><button type="button" class="edit-btn" data-id="${w.id}">Edit</button></td>
     `;
     tbody.appendChild(tr);
   });
 
   listEl.appendChild(table);
 
-  // Attach event listeners
+  // Attach edit listeners
   listEl.querySelectorAll(".edit-btn").forEach((btn) => {
     btn.addEventListener("click", () => startEdit(btn.dataset.id));
-  });
-  listEl.querySelectorAll(".delete-btn").forEach((btn) => {
-    btn.addEventListener("click", () => deleteWorkout(btn.dataset.id));
   });
 }
 
@@ -116,6 +102,7 @@ function clearForm() {
   formTitle.textContent = "Add New Workout";
   submitBtn.textContent = "Add Workout";
   cancelBtn.classList.add("hidden");
+  deleteBtn.classList.add("hidden");
 }
 
 function startEdit(id) {
@@ -133,8 +120,9 @@ function startEdit(id) {
   document.getElementById("comments").value = w.comments || "";
 
   formTitle.textContent = "Edit Workout";
-  submitBtn.textContent = "Update Workout";
+  submitBtn.textContent = "Save";
   cancelBtn.classList.remove("hidden");
+  deleteBtn.classList.remove("hidden");
 
   form.scrollIntoView({ behavior: "smooth" });
 }
@@ -147,7 +135,7 @@ function deleteWorkout(id) {
   if (editingId === id) clearForm();
 }
 
-// Form submit
+// Form submit (add to front or update)
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -179,6 +167,10 @@ form.addEventListener("submit", (e) => {
 });
 
 cancelBtn.addEventListener("click", clearForm);
+
+deleteBtn.addEventListener("click", () => {
+  if (editingId) deleteWorkout(editingId);
+});
 
 // Init
 loadWorkouts();
