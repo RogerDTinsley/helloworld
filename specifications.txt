@@ -1,4 +1,16 @@
 Use this website https://helloworld.rogerdtinsley.workers.dev/ when processing this request.
 Only report changes to files required by this request, but show the entire file(s) affected.
 
-add a separate css and make the theme of the page pink and turquoise.  Center the message.
+add a separate css and make the theme of the page pink and turquoise.  Center everything.
+
+I want to create a web page to be hosted on cloudflare.
+
+I want to use cookies to show all the workouts that have already been added, with a form for a new workout that will be added to the 
+front of the list of existing workouts and saved back to the cookie.
+
+I also want to be able to edit any workout or delete any workout.
+
+Data for a workout includes date, time, workout type (walk, run, swim, bike, other), distance, pace (minutes/mile), outside temperature, weather conditions, 
+and comments.
+
+create separate files for css and index.html, scripts, etc.  
