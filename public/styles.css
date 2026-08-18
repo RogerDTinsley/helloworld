@@ -9,9 +9,6 @@ body {
   background: linear-gradient(135deg, #ff69b4 0%, #40e0d0 100%);
   min-height: 100vh;
   color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
   padding: 1rem;
 }
 
@@ -22,18 +19,19 @@ body {
   width: 100%;
   max-width: 100%;
   padding: 1.5rem;
+  margin: 0 auto;
 }
 
 h1 {
   color: #ff1493;
   margin-bottom: 0.25rem;
-  font-size: 1.8rem;
+  font-size: 2rem;
   text-align: center;
 }
 
 .subtitle {
   color: #20b2aa;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   font-size: 1rem;
   text-align: center;
 }
@@ -57,46 +55,41 @@ table {
 th {
   background: #ff69b4;
   color: white;
-  padding: 0.65rem 0.4rem;
+  padding: 0.75rem 0.5rem;
   font-weight: 600;
   text-align: center;
   white-space: nowrap;
-  font-size: 0.85rem;
 }
 
 td {
-  padding: 0.45rem 0.35rem;
+  padding: 0.5rem;
   text-align: center;
   border-bottom: 1px solid #e0f7f5;
   color: #444;
   vertical-align: middle;
-  font-size: 0.85rem;
 }
 
 tr:nth-child(even) {
   background: #fff0f5;
 }
 
-tr:hover {
-  background: #f0ffff;
+tr.input-row {
+  background: #fff0f5;
 }
 
-#new-row {
-  background: #fff0f5 !important;
-  border-bottom: 3px solid #40e0d0;
+tr.editing {
+  background: #e0f7f5;
 }
 
-input[type="date"],
-input[type="number"],
-input[type="text"],
+input,
 select,
 textarea {
   width: 100%;
   min-width: 0;
-  padding: 0.35rem 0.4rem;
+  padding: 0.45rem 0.5rem;
   border: 2px solid #40e0d0;
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   background: white;
   text-align: center;
 }
@@ -106,23 +99,24 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: #ff69b4;
-  box-shadow: 0 0 0 2px rgba(255, 105, 180, 0.3);
+  box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.3);
 }
 
 textarea {
   resize: vertical;
-  min-height: 2.2rem;
   text-align: left;
+  min-height: 2.2rem;
 }
 
 button {
-  padding: 0.35rem 0.7rem;
+  padding: 0.4rem 0.8rem;
   border: none;
   border-radius: 6px;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.15s, background 0.15s;
+  margin: 0 0.15rem;
   white-space: nowrap;
 }
 
@@ -157,36 +151,28 @@ button {
 }
 
 .btn-delete {
-  background: #ff69b4;
+  background: #ff1493;
   color: white;
 }
 
 .btn-delete:hover {
-  background: #ff1493;
-}
-
-.actions {
-  display: flex;
-  gap: 0.35rem;
-  justify-content: center;
-  flex-wrap: wrap;
+  background: #c71585;
 }
 
 .empty-message {
   color: #20b2aa;
   font-style: italic;
-  padding: 1rem;
+  padding: 1.5rem;
   text-align: center;
 }
 
-/* Make table use as much width as possible */
-@media (min-width: 900px) {
+@media (max-width: 900px) {
   th, td {
-    padding: 0.55rem 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.3rem;
   }
   button {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.8rem;
+    padding: 0.35rem 0.55rem;
+    font-size: 0.75rem;
   }
 }
