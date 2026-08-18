@@ -9,60 +9,30 @@
 <body>
   <div class="container">
     <h1>Workout Tracker</h1>
-    <p class="subtitle">Track your workouts</p>
+    <p class="subtitle">Track your walks, runs, swims, bikes & more</p>
 
-    <h2 id="form-title">Add New Workout</h2>
-    <form id="workout-form">
-      <div class="form-row">
-        <label for="date">Date</label>
-        <input type="date" id="date" required>
-      </div>
-      <div class="form-row">
-        <label for="time">Time</label>
-        <input type="time" id="time" required>
-      </div>
-      <div class="form-row">
-        <label for="type">Workout Type</label>
-        <select id="type" required>
-          <option value="walk" selected>Walk</option>
-          <option value="run">Run</option>
-          <option value="swim">Swim</option>
-          <option value="bike">Bike</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label for="distance">Distance (miles)</label>
-        <input type="number" id="distance" step="0.01" min="0" required>
-      </div>
-      <div class="form-row">
-        <label for="pace">Pace (minutes/mile)</label>
-        <input type="number" id="pace" step="0.01" min="0" required>
-      </div>
-      <div class="form-row">
-        <label for="temp">Outside Temperature (°F)</label>
-        <input type="number" id="temp" step="0.1">
-      </div>
-      <div class="form-row">
-        <label for="weather">Weather Conditions</label>
-        <input type="text" id="weather" placeholder="e.g. sunny, cloudy, rainy">
-      </div>
-      <div class="form-row">
-        <label for="comments">Comments</label>
-        <textarea id="comments" rows="3" placeholder="Optional notes"></textarea>
-      </div>
-      <div class="form-actions">
-        <button type="submit" id="submit-btn">Add Workout</button>
-        <button type="button" id="cancel-btn" class="hidden">Cancel</button>
-        <button type="button" id="delete-btn" class="hidden">Delete</button>
-      </div>
-    </form>
-
-    <h2>Your Workouts</h2>
-    <div id="workouts-list">
-      <!-- table rendered by script.js -->
+    <div class="table-wrapper">
+      <table id="workouts-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Type</th>
+            <th>Distance (mi)</th>
+            <th>Pace (min/mi)</th>
+            <th>Temp (°F)</th>
+            <th>Weather</th>
+            <th>Comments</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="workouts-body">
+          <!-- New entry row + existing rows rendered by script.js -->
+        </tbody>
+      </table>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
