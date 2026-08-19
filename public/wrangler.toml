@@ -1,4 +1,4 @@
-name = "helloworld"
+name = "emails"
 main = "src/index.js"  # or your existing entrypoint; keep if you still need Worker logic
 compatibility_date = "2024-09-23"  # update to a recent date if desired
 
@@ -6,7 +6,3 @@ compatibility_date = "2024-09-23"  # update to a recent date if desired
 directory = "./public"
 # Optional: binding = "ASSETS"  # uncomment if your Worker code needs to call env.ASSETS.fetch(request)
 # Optional: not_found_handling = "single-page-application"  # if you want SPA-style fallback to index.html
-
-[[routes]]
-pattern = "bondslavetesting.org"          # or "api.example.com"
-custom_domain = true
