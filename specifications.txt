@@ -25,7 +25,7 @@ Only report changes to files required by this request, but show the entire file(
 make the theme of the page pink and blue.
 the site is hosted on cloudflare.
 
-Add emails
+Add emails 2
 I want to click a button and have an email sent with all the workouts.  Do this only if there is a valid email in the cookie.
 Before the "email" button is visible, there should be a "register my email" button assuming there is no valid email in the cookie.
 When an email address is "registered", it becomes part of the cookie.
