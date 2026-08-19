@@ -36,6 +36,33 @@ h1 {
   text-align: center;
 }
 
+.email-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem;
+  background: #fff0f5;
+  border: 2px solid #40e0d0;
+  border-radius: 10px;
+}
+
+.email-section input[type="email"] {
+  min-width: 220px;
+  max-width: 320px;
+  padding: 0.45rem 0.6rem;
+  border: 2px solid #40e0d0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.email-section .registered-email {
+  font-weight: 600;
+  color: #ff1493;
+}
+
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
@@ -159,6 +186,29 @@ button {
   background: #c71585;
 }
 
+.btn-register,
+.btn-email {
+  background: #ff69b4;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+
+.btn-register:hover,
+.btn-email:hover {
+  background: #ff1493;
+  transform: translateY(-1px);
+}
+
+.btn-change-email {
+  background: #40e0d0;
+  color: #333;
+}
+
+.btn-change-email:hover {
+  background: #20b2aa;
+  color: white;
+}
+
 .empty-message {
   color: #20b2aa;
   font-style: italic;
@@ -174,5 +224,8 @@ button {
   button {
     padding: 0.35rem 0.55rem;
     font-size: 0.75rem;
+  }
+  .email-section {
+    flex-direction: column;
   }
 }
